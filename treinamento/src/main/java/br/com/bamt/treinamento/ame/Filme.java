@@ -1,12 +1,15 @@
 package br.com.bamt.treinamento.ame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Filme {
 	
-	private String title;
+	private List<String> films = new ArrayList<>();
 	
 	
-	public String getTitle() {
-		return title;
+	public List<String> getFilms() {
+		return films;
 	}
 
 }

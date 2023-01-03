@@ -2,10 +2,10 @@ package br.com.bamt.treinamento.ame;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -18,12 +18,19 @@ public class PlanetService {
 
 	@Autowired
 	private PlanetRepository planetRepository;
-	
 
 	public PlanetResponse save(PlanetRequest planetRequest) {
 		Planet planet = planetRequest.toPlanet();
+	    verifyQuantityFilms(planetRequest.getName());
 		planetRepository.save(planet);
 		return planet.toPlanetResponse();
+	}
+
+
+	private void verifyQuantityFilms(String planetName) {
+		RestTemplate rest = new RestTemplate();
+		Filme filme = rest.getForObject(urlBase + 1, Filme.class);
+		System.out.println("QUANTIDADE DE FILMES: " + filme.getFilms().size());
 	}
 
 
