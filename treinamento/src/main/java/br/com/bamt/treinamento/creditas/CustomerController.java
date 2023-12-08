@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class CustomerController{
 
     @GetMapping("/loan")
-    public String verifyLoan(@RequestBody Customer customer){
-        return customer.toString();
+    public CustomerResponse verifyLoan(@RequestBody Customer customer){
+        customer.verifyCustomerLoan();
+        return new CustomerResponse(customer.getName(), customer.getLoans());
     }
     
 }

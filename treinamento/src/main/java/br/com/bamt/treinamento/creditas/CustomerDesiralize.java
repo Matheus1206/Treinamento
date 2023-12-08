@@ -22,9 +22,12 @@ public class CustomerDesiralize extends StdDeserializer<Customer> {
     public Customer deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
         JsonNode node = p.getCodec().readTree(p);
 
-        String name = node.get("customer").get("name").toString();
-
-        Customer customer = new Customer(name);
+        String name = node.get("customer").get("name").asText();
+        String cpf = node.get("customer").get("cpf").asText();
+        Integer age = node.get("customer").get("age").asInt();
+        String location = node.get("customer").get("location").asText();
+        Integer income = node.get("customer").get("income").asInt();
+        Customer customer = new Customer(name,cpf,age,location,income);
 
         return customer;
     }
